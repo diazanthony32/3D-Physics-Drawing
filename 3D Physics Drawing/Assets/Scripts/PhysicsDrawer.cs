@@ -85,7 +85,7 @@ public class PhysicsDrawer : MonoBehaviour
                 //currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
                 //Activate Physics on the line
-                //currentLine.UsePhysics(true);
+                currentLine.UsePhysics(true);
 
                 currentLine = null;
             }

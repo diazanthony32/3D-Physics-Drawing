@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 488922859}
   - component: {fileID: 488922860}
-  - component: {fileID: 488922861}
   m_Layer: 0
   m_Name: Physics Drawer
   m_TagString: Untagged
@@ -200,22 +199,9 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  linePointsMinDistance: 0.01
+  linePointsMinDistance: 0.05
   lineWidth: 0.1
   cam: {fileID: 1687258584}
---- !u!135 &488922861
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488922858}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
