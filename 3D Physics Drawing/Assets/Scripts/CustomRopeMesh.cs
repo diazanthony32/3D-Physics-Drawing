@@ -120,16 +120,18 @@ public class CustomRopeMesh : MonoBehaviour
 
     void GenerateColliders(Vector3 initial, Vector3 end)
     {
-        GameObject gameObject = Instantiate(new GameObject());
-        gameObject.transform.parent = this.transform;
-        gameObject.transform.position = (end - initial).normalized;
-        //gameObject.transform.rotation = (end - initial).normalized;
+        GameObject g = new GameObject(); 
+        g.transform.parent = this.transform;
+        g.transform.position = ((end + initial)/2);
 
+        Quaternion temp = Quaternion.LookRotation(end - initial);
+        temp *= Quaternion.Euler(90, 0, 0);
+        g.transform.rotation = temp;
 
-        CapsuleCollider collider = this.gameObject.AddComponent<CapsuleCollider>();
+        CapsuleCollider collider = g.AddComponent<CapsuleCollider>();
         collider.radius = ropeDiameter / 2;
-        collider.center = (end-initial).normalized;
-        collider.height = Vector3.Distance(initial, end);
+        //collider.center = (end-initial).normalized;
+        collider.height = Vector3.Distance(initial, end) + 0.25f ;
 
     }
 
@@ -169,7 +171,7 @@ public class CustomRopeMesh : MonoBehaviour
 
         mesh.RecalculateNormals();
 
-        GetComponent<MeshCollider>().sharedMesh = mesh;
+        //GetComponent<MeshCollider>().sharedMesh = mesh;
 
     }
 

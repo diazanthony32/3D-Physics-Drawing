@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502667, g: 0.37139323, b: 0.49600998, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -333,9 +333,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 995358662}
+  - component: {fileID: 995358663}
   - component: {fileID: 995358665}
   - component: {fileID: 995358664}
-  - component: {fileID: 995358663}
   - component: {fileID: 995358666}
   m_Layer: 0
   m_Name: Custom Rope Mesh
@@ -372,8 +372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsArray:
   - {x: 0, y: 5, z: 0}
-  - {x: 7, y: 2.49, z: 7}
-  - {x: 8, y: 2.49, z: 8}
+  - {x: 7, y: 2.5, z: 7}
+  - {x: 8, y: 2.5, z: 8}
   ropeResolution: 6
   ropeDiameter: 0.25
 --- !u!23 &995358664
@@ -438,7 +438,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
