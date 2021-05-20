@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsArray: []
   pointsCount: 0
-  ropeResolution: 6
-  ropeDiameter: 0.25
+  ropeResolution: 32
+  ropeDiameter: 0.05
 --- !u!33 &4927103426240282059
 MeshFilter:
   m_ObjectHideFlags: 0

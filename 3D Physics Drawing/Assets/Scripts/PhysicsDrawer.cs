@@ -63,7 +63,7 @@ public class PhysicsDrawer : MonoBehaviour
 		Vector3 mousePosition = cam.transform.position + (cam.transform.TransformDirection(Vector3.forward) * 2.0f);
 
 		//Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
-		RaycastHit hit;
+		//RaycastHit hit;
 		//if (Physics.SphereCast(mousePosition, lineWidth / 3f, transform.forward, out hit, 2.0f))
 			//EndDraw();
         //else
@@ -81,13 +81,15 @@ public class PhysicsDrawer : MonoBehaviour
             }
             else
             {
-                //Add the line to "CantDrawOver" layer
-                //currentLine.gameObject.layer = cantDrawOverLayerIndex;
+				//currentLine.GenerateMesh();
+				//currentLine.UpdateMesh();
+				//Add the line to "CantDrawOver" layer
+				//currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
-                //Activate Physics on the line
-                //currentLine.UsePhysics(true);
+				//Activate Physics on the line
+				currentLine.UsePhysics(true);
 
-                currentLine = null;
+				currentLine = null;
             }
         }
 	}

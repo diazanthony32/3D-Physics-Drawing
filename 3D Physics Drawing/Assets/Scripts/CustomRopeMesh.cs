@@ -45,8 +45,8 @@ public class CustomRopeMesh : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
         //GetComponent<MeshCollider>().sharedMesh = mesh;
 
-        GenerateMesh();
-        UpdateMesh();
+        //GenerateMesh();
+        //UpdateMesh();
     }
 
     public void AddPoint(Vector3 newPoint)
@@ -58,16 +58,29 @@ public class CustomRopeMesh : MonoBehaviour
         pointsArray.Add(newPoint);
         pointsCount++;
 
-        GenerateMesh();
-        UpdateMesh();
+        if (pointsCount > 1) 
+        {
+            GenerateMesh();
+            UpdateMesh();
+        }
     }
+
     public Vector3 GetLastPoint()
     {
         return (Vector3)pointsArray[pointsArray.Count - 1];
     }
-
-    void GenerateMesh()
+    public void UsePhysics(bool usePhysics)
     {
+        // isKinematic = true  means that this rigidbody is not affected by Unity's physics engine
+        this.GetComponent<Rigidbody>().isKinematic = !usePhysics;
+    }
+
+    // OPTIMIZE LATER: FIGURE OUT A WAY TO PREVENT THE DELETION AND RECREATION OF THE MESH FOR EACH POINT ADDED
+    public void GenerateMesh()
+    {
+        vertices.Clear();
+        triangles.Clear();
+
         // for each segment, generate a cylinder
         for (int i = 0; i < pointsArray.Count - 1; i++)
         {
@@ -125,6 +138,8 @@ public class CustomRopeMesh : MonoBehaviour
 
     void MakeCylinderTriangles(List<int> triangles, int segmentIdx)
     {
+        Debug.Log(segmentIdx);
+        
         // connect the two circles corresponding to segment segmentIdx of the pipe
         int offset = segmentIdx * ropeResolution * 2;
         for (int i = 0; i < ropeResolution; i++)
@@ -152,7 +167,7 @@ public class CustomRopeMesh : MonoBehaviour
         CapsuleCollider collider = g.AddComponent<CapsuleCollider>();
         collider.radius = ropeDiameter / 2;
         //collider.center = (end-initial).normalized;
-        collider.height = Vector3.Distance(initial, end) + 0.25f ;
+        collider.height = Vector3.Distance(initial, end);
 
     }
 
@@ -183,7 +198,7 @@ public class CustomRopeMesh : MonoBehaviour
     }
 
     // Update is called once per frame
-    void UpdateMesh()
+    public void UpdateMesh()
     {
         mesh.Clear();
 
