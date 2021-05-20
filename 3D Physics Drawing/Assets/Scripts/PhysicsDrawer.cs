@@ -9,10 +9,10 @@ public class PhysicsDrawer : MonoBehaviour
 	//public LayerMask cantDrawOverLayer;
 	//int cantDrawOverLayerIndex;
 
-	[Space(30f)]
+	[Space(10f)]
 	//public Gradient lineColor;
-	public float linePointsMinDistance;
-	public float lineWidth;
+	//public float linePointsMinDistance;
+	//public float lineWidth;
 
 	CustomRopeMesh currentLine;
 
@@ -65,9 +65,16 @@ public class PhysicsDrawer : MonoBehaviour
 		//Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
 		//RaycastHit hit;
 		//if (Physics.SphereCast(mousePosition, lineWidth / 3f, transform.forward, out hit, 2.0f))
-			//EndDraw();
-        //else
-            currentLine.AddPoint(mousePosition);
+		//EndDraw();
+		//else
+		if (currentLine.pointsCount < 151)
+		{
+			currentLine.AddPoint(mousePosition);
+		}
+		else
+		{
+			Debug.Log("Max Line Length Reached");
+		}
     }
 	// End Draw ------------------------------------------------
 	void EndDraw()
@@ -87,7 +94,7 @@ public class PhysicsDrawer : MonoBehaviour
 				//currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
 				//Activate Physics on the line
-				currentLine.UsePhysics(true);
+				//currentLine.UsePhysics(true);
 
 				currentLine = null;
             }

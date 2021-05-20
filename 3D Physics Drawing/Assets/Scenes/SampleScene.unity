@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850269, g: 0.3713935, b: 0.49601045, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502667, g: 0.37139323, b: 0.49600998, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,8 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customLinePrefab: {fileID: 4927103426240282055, guid: aa14e36b851086444ba6258222866bb8, type: 3}
-  linePointsMinDistance: 0.025
-  lineWidth: 0.1
+  linePointsMinDistance: 10
   cam: {fileID: 1687258584}
 --- !u!1 &653260035
 GameObject:
