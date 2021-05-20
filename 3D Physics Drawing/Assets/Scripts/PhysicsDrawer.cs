@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PhysicsDrawer : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PhysicsDrawer : MonoBehaviour
 
 	public Camera cam;
 
+	//PlayerInput playerInput;
 
 	void Start()
 	{
@@ -27,38 +29,42 @@ public class PhysicsDrawer : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetButtonDown("Interact"))
-		{
-			Debug.Log("Starting New Line!");
-			BeginDraw();
-		}
+		//if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("e").IsPressed())
+		//{
+		//	Debug.Log("Starting New Line!");
+		//	BeginDraw();
+		//}
 
 		if (currentLine != null)
 		{
 			Draw();
 		}
 
-		if (Input.GetButtonUp("Interact"))
-		{
-			Debug.Log("Line Done");
-			EndDraw();
-		}
+		//if (!Keyboard.current.FindKeyOnCurrentKeyboardLayout("e").IsPressed() && currentLine != null)
+		//{
+		//	Debug.Log("Line Done");
+		//	EndDraw();
+		//}
 	}
 
 	// Begin Draw ----------------------------------------------
-	void BeginDraw()
+	public void BeginDraw(InputAction.CallbackContext context)
 	{
-		currentLine = Instantiate(linePrefab, this.transform).GetComponent<PhysicsLine>();
+        if (context.performed)
+        {
+            Debug.Log("Starting New Line!");
+            currentLine = Instantiate(linePrefab, this.transform).GetComponent<PhysicsLine>();
 
-		//Set line properties
-		currentLine.UsePhysics(false);
-		currentLine.SetLineColor(lineColor);
-		currentLine.SetPointsMinDistance(linePointsMinDistance);
-		currentLine.SetLineWidth(lineWidth);
-
+			//Set line properties
+			currentLine.UsePhysics(false);
+			currentLine.SetLineColor(lineColor);
+			currentLine.SetPointsMinDistance(linePointsMinDistance);
+			currentLine.SetLineWidth(lineWidth);
+		}
 	}
+
 	// Draw ----------------------------------------------------
-	void Draw()
+	public void Draw()
 	{
 		Vector3 mousePosition = cam.transform.position + (cam.transform.TransformDirection(Vector3.forward) * 2.0f);
 
@@ -69,27 +75,32 @@ public class PhysicsDrawer : MonoBehaviour
         //else
             currentLine.AddPoint(mousePosition);
     }
+	
 	// End Draw ------------------------------------------------
-	void EndDraw()
+	public void EndDraw(InputAction.CallbackContext context)
 	{
-		if (currentLine != null)
+		if (context.canceled) 
 		{
-            if (currentLine.pointsCount < 2)
-            {
-                //If line has one point
-                Destroy(currentLine.gameObject);
-            }
-            else
-            {
-                //Add the line to "CantDrawOver" layer
-                //currentLine.gameObject.layer = cantDrawOverLayerIndex;
+            Debug.Log("Line Done");
+            if (currentLine != null)
+			{
+				if (currentLine.pointsCount < 2)
+				{
+					//If line has one point
+					Destroy(currentLine.gameObject);
+				}
+				else
+				{
+					//Add the line to "CantDrawOver" layer
+					//currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
-                //Activate Physics on the line
-                currentLine.UsePhysics(true);
+					//Activate Physics on the line
+					currentLine.UsePhysics(true);
 
-                currentLine = null;
-            }
-        }
+					currentLine = null;
+				}
+			}
+		}
 	}
 
 	void OnDrawGizmos()
