@@ -16,8 +16,9 @@ public class CustomRopeMesh : MonoBehaviour
      */
     Mesh mesh;
 
-    [Header("List")]
+    //[Header("List")]
     public List<Vector3> pointsArray = new List<Vector3>();
+    public int pointsCount = 0;
 
     //Vector3[] ropeVerticies;
     //int[] ropeTriangles;
@@ -32,6 +33,9 @@ public class CustomRopeMesh : MonoBehaviour
     public float ropeDiameter;
     //public float ropeLength;
 
+    //The minimum distance between line's points.
+    float pointsMinDistance = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,23 @@ public class CustomRopeMesh : MonoBehaviour
 
         GenerateMesh();
         UpdateMesh();
+    }
+
+    public void AddPoint(Vector3 newPoint)
+    {
+        //If distance between last point and new point is less than pointsMinDistance do nothing (return)
+        if (pointsCount >= 1 && Vector3.Distance(newPoint, GetLastPoint()) < pointsMinDistance)
+            return;
+
+        pointsArray.Add(newPoint);
+        pointsCount++;
+
+        GenerateMesh();
+        UpdateMesh();
+    }
+    public Vector3 GetLastPoint()
+    {
+        return (Vector3)pointsArray[pointsArray.Count - 1];
     }
 
     void GenerateMesh()

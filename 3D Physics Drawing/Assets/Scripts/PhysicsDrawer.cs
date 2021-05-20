@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PhysicsDrawer : MonoBehaviour
 {
-	public GameObject linePrefab;
+	public GameObject customLinePrefab;
 
-	public LayerMask cantDrawOverLayer;
-	int cantDrawOverLayerIndex;
+	//public LayerMask cantDrawOverLayer;
+	//int cantDrawOverLayerIndex;
 
 	[Space(30f)]
-	public Gradient lineColor;
+	//public Gradient lineColor;
 	public float linePointsMinDistance;
 	public float lineWidth;
 
-	PhysicsLine currentLine;
+	CustomRopeMesh currentLine;
 
 	public Camera cam;
 
@@ -22,7 +22,7 @@ public class PhysicsDrawer : MonoBehaviour
 	void Start()
 	{
 		//cam = Camera.main;
-		cantDrawOverLayerIndex = LayerMask.NameToLayer("CantDrawOver");
+		//cantDrawOverLayerIndex = LayerMask.NameToLayer("CantDrawOver");
 	}
 
 	void Update()
@@ -48,13 +48,13 @@ public class PhysicsDrawer : MonoBehaviour
 	// Begin Draw ----------------------------------------------
 	void BeginDraw()
 	{
-		currentLine = Instantiate(linePrefab, this.transform).GetComponent<PhysicsLine>();
+		currentLine = Instantiate(customLinePrefab, this.transform).GetComponent<CustomRopeMesh>();
 
 		//Set line properties
-		currentLine.UsePhysics(false);
-		currentLine.SetLineColor(lineColor);
-		currentLine.SetPointsMinDistance(linePointsMinDistance);
-		currentLine.SetLineWidth(lineWidth);
+		//currentLine.UsePhysics(false);
+		//currentLine.SetLineColor(lineColor);
+		//currentLine.SetPointsMinDistance(linePointsMinDistance);
+		//currentLine.SetLineWidth(lineWidth);
 
 	}
 	// Draw ----------------------------------------------------
@@ -85,7 +85,7 @@ public class PhysicsDrawer : MonoBehaviour
                 //currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
                 //Activate Physics on the line
-                currentLine.UsePhysics(true);
+                //currentLine.UsePhysics(true);
 
                 currentLine = null;
             }
