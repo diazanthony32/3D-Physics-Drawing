@@ -41,11 +41,18 @@ public class CustomRopeMesh : MonoBehaviour
     //The minimum distance between line's points.
     public float pointsMinDistance = 0.1f;
 
+    LineRenderer lineRenderer;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         mesh = new Mesh();
         mesh.name = "UnityPlumber Pipe";
+
+        lineRenderer = GetComponent<LineRenderer>();
+
+        lineRenderer.startWidth = ropeRadius*2;
+        lineRenderer.endWidth = ropeRadius*2;
 
         GetComponent<MeshFilter>().mesh = mesh;
         //GetComponent<MeshCollider>().sharedMesh = mesh;
@@ -62,6 +69,10 @@ public class CustomRopeMesh : MonoBehaviour
 
         pointsArray.Add(newPoint);
         pointsCount++;
+
+        //Line Renderer
+        lineRenderer.positionCount = pointsCount;
+        lineRenderer.SetPosition(pointsCount - 1, newPoint);
 
         if (pointsCount > 1) 
         {
@@ -109,10 +120,10 @@ public class CustomRopeMesh : MonoBehaviour
 
             // generate two circles with "pipeSegments" sides each and then
             // connect them to make the cylinder
-            GenerateCircleAroundPoint(vertices, normals, initialPoint, direction);
-            GenerateCircleAroundPoint(vertices, normals, endPoint, direction);
+            //GenerateCircleAroundPoint(vertices, normals, initialPoint, direction);
+            //GenerateCircleAroundPoint(vertices, normals, endPoint, direction);
 
-            MakeCylinderTriangles(triangles, i);
+            //MakeCylinderTriangles(triangles, i);
 
             GenerateColliders(initialPoint, endPoint);
         }
@@ -129,7 +140,7 @@ public class CustomRopeMesh : MonoBehaviour
         //}
         //}
 
-        GenerateEndCaps(vertices, triangles, normals);
+        //GenerateEndCaps(vertices, triangles, normals);
 
     }
 

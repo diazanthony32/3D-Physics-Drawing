@@ -88,15 +88,15 @@ public class PhysicsDrawer : MonoBehaviour
             }
             else
             {
-				//currentLine.GenerateMesh();
-				//currentLine.UpdateMesh();
-				//Add the line to "CantDrawOver" layer
-				//currentLine.gameObject.layer = cantDrawOverLayerIndex;
+                //currentLine.GenerateMesh();
+                //currentLine.UpdateMesh();
+                //Add the line to "CantDrawOver" layer
+                //currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
-				//Activate Physics on the line
-				//currentLine.UsePhysics(true);
+                //Activate Physics on the line
+                currentLine.UsePhysics(true);
 
-				currentLine = null;
+                currentLine = null;
             }
         }
 	}
